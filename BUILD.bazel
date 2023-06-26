@@ -1,0 +1,23 @@
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake")
+
+package(default_visibility = ["//visibility:public"])
+
+cmake(
+    name = "polyscope",
+    cache_entries = {
+        "CMAKE_C_FLAGS": "-fPIC",
+    },
+    lib_source = "@polyscope//:all_srcs",
+    out_static_libs = ["libpolyscope.a"],
+    deps = [
+        "@imgui",
+    ],
+)
+
+cc_binary(
+    name = "example",
+    srcs = ["example.cc"],
+    deps = [
+        ":polyscope",
+    ],
+)
