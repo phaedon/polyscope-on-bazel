@@ -1,6 +1,5 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
-load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
 
 http_archive(
     name = "com_google_googletest",
@@ -16,13 +15,11 @@ http_archive(
 
 http_archive(
     name = "rules_foreign_cc",
-    # TODO: Get the latest sha256 value from a bazel debug message or the latest
-    #       release on the releases page: https://github.com/bazelbuild/rules_foreign_cc/releases
-    #
-    # sha256 = "...",
     strip_prefix = "rules_foreign_cc-6ecc134b114f6e086537f5f0148d166467042226",
     url = "https://github.com/bazelbuild/rules_foreign_cc/archive/6ecc134b114f6e086537f5f0148d166467042226.tar.gz",
 )
+
+load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
 
 rules_foreign_cc_dependencies()
 
@@ -55,7 +52,6 @@ cc_library(
     visibility = ['//visibility:public'],
 )
 """,
-    #sha256 = "8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72",
     strip_prefix = "imgui-1.89.6/",
     urls = ["https://github.com/ocornut/imgui/archive/refs/tags/v1.89.6.tar.gz"],
 )
